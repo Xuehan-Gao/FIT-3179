@@ -1,0 +1,44 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Top 10 Countries by Cumulative Fatalities (2012-2022)",
+    "background": "mintcream",
+    "data": {
+      "url": "https://raw.githubusercontent.com/Xuehan-Gao/FIT-3179/master/Assignment%202/Global_Terrorism_Index_2023.csv"
+    },
+    "transform": [
+      {
+        "aggregate": [
+          {"op": "sum", "field": "Fatalities", "as": "TotalFatalities"}
+        ],
+        "groupby": ["Country"]
+      },
+      {
+        "sort": [{"field": "TotalFatalities", "order": "descending"}],
+        "window": [{"op": "row_number", "as": "rank"}],
+        "frame": [null, null]
+      },
+      {
+        "filter": "datum.rank <= 10"
+      }
+    ],
+    "mark": "arc",
+    "encoding": {
+      "theta": {
+        "field": "TotalFatalities",
+        "type": "quantitative",
+        "stack": true
+      },
+    "color": {
+    "field": "Country",
+    "type": "nominal",
+    "legend": {
+      "title": "Country"
+    }
+  },
+      "tooltip": [
+        {"field": "Country", "type": "nominal"},
+        {"field": "TotalFatalities", "type": "quantitative", "title": "Total Fatalities"}
+      ]
+    },
+    "view": {"stroke": "white", "strokeWidth": 0.5}
+  }

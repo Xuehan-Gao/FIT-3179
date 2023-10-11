@@ -1,0 +1,56 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Total Fatalities, Injuries, and Hostages per Year",
+    "background": "mintcream",
+    "data": {
+        "url": "https://raw.githubusercontent.com/Xuehan-Gao/FIT-3179/master/Assignment%202/Global_Terrorism_Index_2023.csv"
+    },
+    "transform": [
+        {
+            "aggregate": [
+                {"op": "sum", "field": "Fatalities", "as": "TotalFatalities"},
+                {"op": "sum", "field": "Injuries", "as": "TotalInjuries"},
+                {"op": "sum", "field": "Hostages", "as": "TotalHostages"}
+            ],
+            "groupby": ["Year"]
+        },
+        {
+            "fold": ["TotalFatalities", "TotalInjuries", "TotalHostages"],
+            "as": ["Metric", "Value"]
+        }
+    ],
+    "encoding": {
+        "x": {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Year"
+        },
+        "y": {
+            "field": "Value",
+            "type": "quantitative",
+            "title": "Total Count"
+        },
+        "color": {
+            "field": "Metric",
+            "type": "nominal",
+            "legend": {
+                "title": "Metric"
+            }
+        }
+    },
+    "layer": [
+        {
+            "mark": "line"
+        },
+        {
+            "mark": "point",
+            "encoding": {
+                "tooltip": [
+                    {"field": "Year", "type": "ordinal", "title": "Year"},
+                    {"field": "Metric", "type": "nominal", "title": "Metric"},
+                    {"field": "Value", "type": "quantitative", "title": "Total Count"}
+                ]
+            }
+        }
+    ]
+}

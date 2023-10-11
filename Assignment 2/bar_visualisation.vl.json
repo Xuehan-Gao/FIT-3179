@@ -1,0 +1,89 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Incidents of Top 10 Countries (2012-2022)",
+    "width": 600,
+    "height": 400,
+    "background": "mintcream",
+    "data": {
+      "url": "https://raw.githubusercontent.com/Xuehan-Gao/FIT-3179/master/Assignment%202/Global_Terrorism_Index_2023.csv"
+    },
+    "vconcat": [
+      {
+        "mark": "point",
+        "selection": {
+          "selectedYear": {
+            "type": "single",
+            "fields": ["Year"],
+            "init": {"Year": "2022"},
+            "bind": {
+              "input": "select",
+              "options": ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"],
+              "name": "Year"
+            }
+          }
+        },
+        "encoding": {
+          "y": {"value": 0},
+          "size": {"value": 0}
+        }
+      },
+      {
+        "width": 600,
+        "height": 400,
+        "transform": [
+          {"filter": "datum.Year == selectedYear.Year"},
+          {"window": [{"op": "rank", "field": "Rank", "as": "ranked"}]},
+          {"filter": "datum.ranked <= 10"}
+        ],
+        "layer": [
+          {
+            "mark": "bar",
+            "encoding": {
+              "x": {
+                "field": "Country",
+                "type": "nominal",
+                "title": "Country",
+                "scale": {"padding": 0}
+              },
+              "y": {
+                "field": "Incidents",
+                "type": "quantitative",
+                "title": "Incidents"
+              },
+              "color": {
+                "field": "Country",
+                "type": "nominal",
+                "legend": {
+                  "title": "Country"
+                }
+              },
+              "tooltip": [
+                {"field": "Country", "type": "nominal", "title": "Country"},
+                {"field": "Year", "type": "ordinal", "title": "Year"},
+                {
+                  "field": "Incidents",
+                  "type": "quantitative",
+                  "title": "Incidents",
+                  "format": ","
+                }
+              ]
+            }
+          },
+          {
+            "mark": {
+              "type": "text",
+              "align": "center",
+              "baseline": "bottom",
+              "dy": -5,
+              "fontSize": 11
+            },
+            "encoding": {
+              "x": {"field": "Country", "type": "nominal"},
+              "y": {"field": "Incidents", "type": "quantitative"},
+              "text": {"field": "Incidents", "type": "quantitative"}
+            }
+          }
+        ]
+      }
+    ]
+  }
