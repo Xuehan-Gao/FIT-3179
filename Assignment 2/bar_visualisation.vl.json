@@ -1,8 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "Incidents of Top 10 Countries (2012-2022)",
-    "width": 600,
-    "height": 400,
     "background": "mintcream",
     "data": {
       "url": "https://raw.githubusercontent.com/Xuehan-Gao/FIT-3179/master/Assignment%202/Global_Terrorism_Index_2023.csv"
@@ -43,7 +41,7 @@
                 "field": "Country",
                 "type": "nominal",
                 "title": "Country",
-                "scale": {"padding": 0}
+                "scale": {"padding": 0.4}
               },
               "y": {
                 "field": "Incidents",
@@ -53,6 +51,9 @@
               "color": {
                 "field": "Country",
                 "type": "nominal",
+                "scale": {
+                    "scheme": "set3"
+                  },
                 "legend": {
                   "title": "Country"
                 }

@@ -1,41 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Visualizations</title>
+    <title>Global Terrorism Data Visualizations</title>
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+    <style>
+        body {
+            background-color: mintcream;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .visualization {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            background-color: skyblue; 
+            padding: 20px; 
+        }
+
+        .subtitle {
+            text-align: left;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        h2 {
+            background-color: skyblue;
+            padding: 10px 15px;
+        }
+
+        .text-section {
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .chart-description.bar-description {
+            flex: 0.5;
+        }
+
+        #mapSection {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #combinedSection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+        }
+
+        #lineChart {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        #pieVis {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        #barSection {
+            display: flex;
+            align-items: center; 
+        }
+
+        #barVis {
+            flex: 0.7; 
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        .chart-description {
+            margin-left: 20px;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="container">
+        <h1>Global Terrorism Data Visualizations</h1>
+        <p class="subtitle">This data visualization aims to provide a comprehensive overview of global terrorism by presenting various aspects such as the number of fatalities, accidents, and injuries across different countries.   By analyzing this data, viewers can gain insights into the patterns and trends associated with terrorist activities worldwide.<br> <br>
+            The inclusion of fatalities allows us to understand the devastating impact that terrorism has on human lives. It highlights the urgency for governments and international organizations to collaborate in combating this threat effectively.<br> <br> 
+            Additionally, by showcasing the number of accidents related to terrorism in different countries, we can identify regions that are more prone to such incidents. This information is crucial for policymakers and security agencies as it helps them allocate resources strategically and implement preventive measures accordingly.<br><br> 
+            Furthermore, providing statistics on injuries resulting from terrorist attacks offers a deeper understanding of their consequences beyond just loss of life.<br> <br> 
+            By visualizing these diverse aspects together, this data presentation enables researchers, analysts, and policymakers to explore correlations between variables like geographical location or socio-economic factors with terrorism rates.<br><br> 
+            Such insights can contribute towards developing targeted strategies aimed at reducing global terrorism threats while ensuring peace and stability worldwide. It is important to note that this expansion focuses solely on objective analysis without any subjective opinions or evaluations about individuals involved or political discussions surrounding terrorism-related issues.</p>
 
-<div id="vis1"></div>
-<div id="vis2"></div>
-<div id="vis3"></div>
-<div id="vis4"></div>
+        <section class="visualization">
+            <h2>Map Visualization</h2>
+            <div id="mapSection">
+                <div class="map-description text-section">
+                    <p>The map illustrates the concentration of terrorism incidents across different regions in the world. The color gradient ranging from light to dark indicates the density of incidents, with darker shades pointing to higher concentrations.
+                        The right side of the map showcases a vertical scale indicating the number of incidents, which spans from 0 to 600. The color gradient on this scale corresponds to the shading on the map.
+                    </p>
+                </div>
+                <div id="mapVis"></div>
+                <div class="map-description text-section">
+                    <p>Certain regions, particularly in Central Asia and Northern Africa, show a relatively darker shade, indicating a higher number of incidents in those areas. Most parts of the world appear to have a light shade, suggesting a lower number of incidents. This indicate that while certain hotspots exist, a large portion of the world experienced relatively fewer terrorism-related events in 2023.</p>
+                </div>
+            </div>
+        </section>
 
-<script type="text/javascript">
-    var specVis1 = "./line_chart.vl.json";
-    var specVis2 = "./map_visualisation.vl.json";
-    var specVis3 = "./pie_visualisation.vl.json";
-    var specVis4 = "./bar_visualisation.vl.json";
+        <section class="visualization">
+            <h2>Line and Pie Visualizations</h2>
+            <div id="combinedSection">
+                <div id="lineVis"></div>
+                <div class="chart-description text-section">
+                    <p>The annual count of three metrics, namely fatalities, injuries, and hostages from 2012 to 2022 is observable. It is apparent that the fatalities (represented by the blue line) reached its peak around 2015 and subsequently experienced a significant decline, reaching its lowest point in 2022. The count of injuries (represented by the red line) exhibits a similar trend to fatalities with a peak around 2015 followed by a decrease. However, unlike the other two metrics, the hostage count (represented by the orange line) appears more consistent throughout these years with slight fluctuations but no prominent peaks.</p>
+                </div>
+                <div id="pieVis"></div>
+                <div class="chart-description text-section">
+                    <p>The pie chart shows the distribution of cumulative fatalities between 2012 and 2022 across the top ten countries. The varying proportions of each sector signify significant disparities in fatality rates among these nations during this time frame. Notably, Afghanistan exhibits the largest segment, indicating its highest number of fatalities within the given period. Similarly, Iraq, Nigeria, and Syria also display substantial segments denoting a considerable number of casualties experienced by these countries.</p>
+                </div>
+            </div>
+        </section>
 
-    vegaEmbed('#vis1', specVis1, { "actions": false });
+        <section class="visualization">
+            <h2>Bar Visualization</h2>
+            <div id="barSection">
+                <div id="barVis"></div>
+                <div class="chart-description bar-description">
+                    <p>From 2012 to 2022, the top 10 countries experienced a range of security incidents. Notably, Afghanistan exhibited the highest number of incidents at 755, surpassing other nations by a significant margin. Iraq followed with 401 incidents, while Mali and Myanmar were closely matched with respective counts of 272 and 298. On the lower end of the spectrum, Niger reported only 54 incidents. The remaining countries on this list - Nigeria, Pakistan, Somalia and Syria - demonstrated varying incident counts between approximately100 to300. These data underscore Afghanistan's preeminent security challenges compared to its counterparts in this cohort.</p>
+                </div>
+            </div>
+        </section>
+    </div>
 
-    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+    <script type="text/javascript">
+        var specVis1 = "./map_visualisation.vl.json";
+        var specVis2 = "./line_chart.vl.json";
+        var specVis3 = "./bar_visualisation.vl.json";
+        var specVis4 = "./pie_visualisation.vl.json"
+    
+        vegaEmbed('#mapVis', specVis1, { "actions": false }).then(function (result) {
+    
+        }).catch(console.error);
+    
+        vegaEmbed('#lineVis', specVis2, { "actions": false }).then(function (result) {
+    
+        }).catch(console.error);
 
-    }).catch(console.error);
+        vegaEmbed('#barVis', specVis3, { "actions": false }).then(function (result) {
+    
+        }).catch(console.error);
 
-    vegaEmbed('#vis3', specVis3, { "actions": false }).then(function (result) {
-
-}).catch(console.error);
-
-vegaEmbed('#vis4', specVis4, { "actions": false }).then(function (result) {
-
-}).catch(console.error);
-
-</script>
-
+        vegaEmbed('#pieVis', specVis4, { "actions": false }).then(function (result) {
+    
+        }).catch(console.error);
+    
+    </script>
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+

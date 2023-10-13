@@ -1,6 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "Total Fatalities, Injuries, and Hostages per Year",
+    "title": "Total Fatalities, Injuries, and Hostages per Year",
+    "width": 300,
+    "height": 200,
     "background": "mintcream",
     "data": {
         "url": "https://raw.githubusercontent.com/Xuehan-Gao/FIT-3179/master/Assignment%202/Global_Terrorism_Index_2023.csv"
