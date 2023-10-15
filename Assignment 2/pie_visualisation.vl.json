@@ -16,8 +16,7 @@
       },
       {
         "sort": [{"field": "TotalFatalities", "order": "descending"}],
-        "window": [{"op": "row_number", "as": "rank"}],
-        "frame": [null, null]
+        "window": [{"op": "row_number", "as": "rank"}]
       },
       {
         "filter": "datum.rank <= 10"
@@ -27,8 +26,7 @@
     "encoding": {
       "theta": {
         "field": "TotalFatalities",
-        "type": "quantitative",
-        "stack": true
+        "type": "quantitative"
       },
     "color": {
     "field": "Country",
